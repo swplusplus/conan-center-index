@@ -57,6 +57,9 @@ class ZyreConan(ConanFile):
         self._cmake = CMake(self)
         self._cmake.verbose = True
         self._cmake.definitions["ENABLE_DRAFTS"] = self.options.drafts
+        self._cmake.definitions["ZYRE_BUILD_STATIC"] = not self.options.shared
+        self._cmake.definitions["ZYRE_BUILD_SHARED"] = self.options.shared
+        self._cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         self._cmake.configure(build_dir=self._build_subfolder)
         return self._cmake
 
@@ -75,7 +78,7 @@ class ZyreConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.names["pkg_config"] = "libzyre"
-        self.cpp_info.libs = ["zyre"]
+        self.cpp_info.libs = ["libzyre"]
         if self.settings.os == "Linux":
             self.cpp_info.system_libs = ["pthread", "dl", "rt", "m"]
         if not self.options.shared:

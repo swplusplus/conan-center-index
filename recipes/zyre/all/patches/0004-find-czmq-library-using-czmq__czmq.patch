@@ -1,0 +1,15 @@
+Index: CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CMakeLists.txt	(revision d7ff8fa37822f07bfc12129e30b947bc5b339bdb)
++++ CMakeLists.txt	(date 1604564771264)
+@@ -147,6 +147,7 @@
+ IF (CZMQ_FOUND)
+     include_directories(${CZMQ_INCLUDE_DIRS})
+     list(APPEND MORE_LIBRARIES ${CZMQ_LIBRARIES})
++    list(APPEND MORE_LIBRARIES czmq::czmq)
+   IF (PC_CZMQ_FOUND)
+       set(pkg_config_names_private "${pkg_config_names_private} libczmq")
+       list(APPEND OPTIONAL_LIBRARIES_STATIC ${PC_CZMQ_STATIC_LDFLAGS})
